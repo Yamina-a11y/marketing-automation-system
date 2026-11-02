@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MarketFlow | Marketing Automation</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+
+    <aside class="sidebar">
+      <h2 class="brand">📢 MarketFlow</h2>
+      <p class="menu-label">WORKSPACE</p>
+
+      <nav>
+        <a href="#dashboard" class="nav-link active">▦ Dashboard</a>
+        <a href="#campaigns" class="nav-link">✉ Campaigns</a>
+        <a href="#templates" class="nav-link">▤ Email Templates</a>
+        <a href="#subscribers" class="nav-link">♙ Subscribers</a>
+        <a href="#analytics" class="nav-link">▥ Analytics</a>
+        <a href="#workflows" class="nav-link">⟳ Workflows</a>
+        <a href="#landing-pages" class="nav-link">▣ Landing Pages</a>
+        <a href="#reports" class="nav-link">▧ Reports</a>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <p>Marketing made simpler.</p>
+        <button id="theme-toggle" class="theme-button">◐ Toggle theme</button>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">MARKETING WORKSPACE</p>
+          <h1>Marketing Dashboard</h1>
+        </div>
+        <div class="profile">
+          <span class="avatar">A</span>
+          <div>
+            <strong>Admin User</strong>
+            <small>Administrator</small>
+          </div>
+          <button id="logout-btn" class="secondary-button">Log out</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="page-section">
+        <div class="welcome">
+          <div>
+            <p class="eyebrow">OVERVIEW</p>
+            <h2>Welcome back, Admin 👋</h2>
+            <p>Track your campaigns and understand your audience.</p>
+          </div>
+          <button class="primary-button" id="dashboard-create">
+            + Create Campaign
+          </button>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <p>Total Campaigns</p>
+            <h2 id="total-campaigns">0</h2>
+            <small>All campaign records</small>
+          </article>
+          <article class="stat-card">
+            <p>Total Subscribers</p>
+            <h2 id="total-subscribers">0</h2>
+            <small>Managed contacts</small>
+          </article>
+          <article class="stat-card">
+            <p>Average Open Rate</p>
+            <h2 id="average-open">0%</h2>
+            <small>Sample campaign data</small>
+          </article>
+          <article class="stat-card">
+            <p>Average Click Rate</p>
+            <h2 id="average-click">0%</h2>
+            <small>Sample campaign data</small>
+          </article>
+        </div>
+
+        <div class="content-grid">
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <h3>Campaign Performance</h3>
+                <p>Open and click rates</p>
+              </div>
+            </div>
+            <div id="performance-chart" class="chart-area"></div>
+            <div class="chart-legend">
+              <span>● Open rate</span>
+              <span>● Click rate</span>
+            </div>
+          </article>
+
+          <article class="panel">
+            <h3>Campaign Status</h3>
+            <p>Current campaign distribution</p>
+            <div id="status-summary" class="status-summary"></div>
+          </article>
+        </div>
+
+        <article class="panel">
+          <div class="panel-heading">
+            <div>
+              <h3>Recent Campaigns</h3>
+              <p>Your latest marketing activities</p>
+            </div>
+            <a href="#campaigns">View all →</a>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Campaign</th>
+                  <th>Audience</th>
+                  <th>Status</th>
+                  <th>Open Rate</th>
+                </tr>
+              </thead>
+              <tbody id="recent-campaigns"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section id="campaigns" class="page-section">
+        <div class="section-heading">
+          <div>
+            <h2>Campaign Management</h2>
+            <p>Create and manage your marketing campaigns.</p>
+          </div>
+          <button class="primary-button" id="create-campaign">
+            + New Campaign
+          </button>
+        </div>
+
+        <div class="toolbar">
+          <input id="campaign-search" placeholder="Search campaigns...">
+          <select id="campaign-filter">
+            <option value="all">All statuses</option>
+            <option value="Draft">Draft</option>
+            <option value="Scheduled">Scheduled</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+            <option value="Cancelled">Cancelled</option>
+          </select>
+        </div>
+
+        <article class="panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Campaign</th>
+                  <th>Type</th>
+                  <th>Audience</th>
+                  <th>Status</th>
+                  <th>Open Rate</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="campaign-list"></tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="panel" id="campaign-form-panel" hidden>
+          <h3 id="campaign-form-title">Create Campaign</h3>
+          <form id="campaign-form">
+            <input type="hidden" id="campaign-id">
+            <label for="campaign-name">Campaign Name</label>
+            <input id="campaign-name" required maxlength="100"
+              placeholder="e.g. Winter Sale 2026">
+
+            <label for="campaign-type">Campaign Type</label>
+            <select id="campaign-type">
+              <option>Email Campaign</option>
+              <option>Product Launch</option>
+              <option>Newsletter</option>
+              <option>Promotional Offer</option>
+            </select>
+
+            <label for="campaign-audience">Target Audience</label>
+            <select id="campaign-audience">
+              <option>All Subscribers</option>
+              <option>Engaged Subscribers</option>
+              <option>New Subscribers</option>
+            </select>
+
+            <label for="campaign-status">Status</label>
+            <select id="campaign-status">
+              <option>Draft</option>
+              <option>Scheduled</option>
+              <option>In Progress</option>
+              <option>Completed</option>
+              <option>Cancelled</option>
+            </select>
+
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Save Campaign</button>
+              <button class="secondary-button" type="button"
+                id="cancel-campaign">Cancel</button>
+            </div>
+          </form>
+        </article>
+      </section>
+
+      <section id="templates" class="page-section">
+        <div class="section-heading">
+          <div>
+            <h2>Email Templates</h2>
+            <p>Create reusable email content for your campaigns.</p>
+          </div>
+          <button class="primary-button" id="add-template">+ New Template</button>
+        </div>
+
+        <article class="panel" id="template-form-panel" hidden>
+          <h3>Create Email Template</h3>
+          <form id="template-form">
+            <label for="template-name">Template Name</label>
+            <input id="template-name" required maxlength="100"
+              placeholder="Welcome Email">
+
+            <label for="template-subject">Email Subject</label>
+            <input id="template-subject" required maxlength="150"
+              placeholder="Welcome to our community!">
+
+            <label for="template-content">Email Content</label>
+            <textarea id="template-content" required rows="5"
+              placeholder="Write your email here..."></textarea>
+
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Save Template</button>
+              <button class="secondary-button" type="button"
+                id="cancel-template">Cancel</button>
+            </div>
+          </form>
+        </article>
+        <div id="template-list" class="cards-grid"></div>
+      </section>
+
+      <section id="subscribers" class="page-section">
+        <div class="section-heading">
+          <div>
+            <h2>Subscribers</h2>
+            <p>Manage your audience and contact information.</p>
+          </div>
+          <button class="primary-button" id="add-subscriber">+ Add Subscriber</button>
+        </div>
+
+        <article class="panel" id="subscriber-form-panel" hidden>
+          <h3>Add Subscriber</h3>
+          <form id="subscriber-form">
+            <label for="subscriber-name">Full Name</label>
+            <input id="subscriber-name" required maxlength="100"
+              placeholder="Alex Johnson">
+
+            <label for="subscriber-email">Email Address</label>
+            <input id="subscriber-email" type="email" required
+              placeholder="alex@example.com">
+
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Save Subscriber</button>
+              <button class="secondary-button" type="button"
+                id="cancel-subscriber">Cancel</button>
+            </div>
+          </form>
+        </article>
+
+        <div class="toolbar">
+          <input id="subscriber-search" placeholder="Search subscribers...">
+          <button class="secondary-button" id="export-subscribers">Export CSV</button>
+        </div>
+
+        <article class="panel">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Status</th>
+                  <th>Subscribed Date</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody id="subscriber-list"></tbody>
+            </table>
+          </div>
+        </article>
+      </section>
+
+      <section id="analytics" class="page-section">
+        <div class="section-heading">
+          <div>
+            <h2>Campaign Analytics</h2>
+            <p>Explore engagement metrics from your sample campaigns.</p>
+          </div>
+          <button class="secondary-button" id="export-report">Export CSV Report</button>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card">
+            <p>Total Campaigns</p>
+            <h2 id="analytics-total">0</h2>
+          </article>
+          <article class="stat-card">
+            <p>Average Open Rate</p>
+            <h2 id="analytics-open">0%</h2>
+          </article>
+          <article class="stat-card">
+            <p>Average Click Rate</p>
+            <h2 id="analytics-click">0%</h2>
+          </article>
+          <article class="stat-card">
+            <p>Completed Campaigns</p>
+            <h2 id="analytics-completed">0</h2>
+          </article>
+        </div>
+        <article class="panel">
+          <h3>Engagement Overview</h3>
+          <div id="analytics-chart" class="chart-area"></div>
+        </article>
+        <p class="notice">Analytics use demonstration data, not actual email tracking.</p>
+      </section>
+
+      <section id="workflows" class="page-section">
+        <div class="section-heading">
+          <div>
+            <h2>Automation Workflows</h2>
+            <p>Simulate automated customer email journeys.</p>
+          </div>
+          <button class="primary-button" id="add-workflow">+ New Workflow</button>
+        </div>
+        <article class="panel" id="workflow-form-panel" hidden>
+          <form id="workflow-form">
+            <label for="workflow-name">Workflow Name</label>
+            <input id="workflow-name" required maxlength="100"
+              placeholder="Welcome Series">
+
+            <label for="workflow-trigger">Trigger</label>
+            <select id="workflow-trigger">
+              <option>New subscriber</option>
+              <option>Abandoned cart</option>
+              <option>Inactive customer</option>
+              <option>Campaign interaction</option>
+            </select>
+
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Save Workflow</button>
+              <button class="secondary-button" type="button"
+                id="cancel-workflow">Cancel</button>
+            </div>
+          </form>
+        </article>
+        <div id="workflow-list" class="cards-grid"></div>
+      </section>
+
+      <section id="landing-pages" class="page-section">
+        <div class="section-heading">
+          <div>
+            <h2>Landing Pages</h2>
+            <p>Manage example pages for marketing campaigns.</p>
+          </div>
+          <button class="primary-button" id="add-landing-page">+ Create Page</button>
+        </div>
+        <article class="panel" id="landing-form-panel" hidden>
+          <form id="landing-form">
+            <label for="landing-name">Page Name</label>
+            <input id="landing-name" required maxlength="100"
+              placeholder="Summer Sale Landing Page">
+            <label for="landing-description">Page Description</label>
+            <textarea id="landing-description" required rows="3"
+              placeholder="Describe your campaign landing page"></textarea>
+            <div class="form-actions">
+              <button class="primary-button" type="submit">Save Page</button>
+              <button class="secondary-button" type="button"
+                id="cancel-landing">Cancel</button>
+            </div>
+          </form>
+        </article>
+        <div id="landing-list" class="cards-grid"></div>
+      </section>
+
+      <section id="reports" class="page-section">
+        <div class="section-heading">
+          <div>
+            <h2>Reports</h2>
+            <p>Export a summary of your sample marketing data.</p>
+          </div>
+          <button class="primary-button" id="download-report">Download Report (CSV)</button>
+        </div>
+        <article class="panel">
+          <h3>Report Summary</h3>
+          <p id="report-summary">Your campaign report will appear here.</p>
+        </article>
+      </section>
+
+      <footer>
+        MarketFlow · Marketing Automation System · Internship Project
+      </footer>
+    </main>
+  </div>
+
+  <dialog id="login-dialog">
+    <form id="login-form" class="login-card">
+      <h2>Welcome to MarketFlow</h2>
+      <p>Sign in to your demo workspace.</p>
+      <label for="login-email">Email</label>
+      <input id="login-email" type="email" required
+        placeholder="admin@example.com">
+      <label for="login-password">Password</label>
+      <input id="login-password" type="password" required
+        placeholder="Enter any demo password">
+      <button class="primary-button" type="submit">Sign In</button>
+      <small>Demo login only. No real authentication is provided.</small>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
